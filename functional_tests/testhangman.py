@@ -13,7 +13,9 @@ class HangmanGameTest(StaticLiveServerTestCase):
        self.driver.quit()
 
    def test_hangman_game(self):
-      #ปาร์คเห็นว่าใน url มีคำว่า hangman
-       self.assertIn("/hangman", self.driver.current_url) 
+        self.driver.get(self.live_server_url + "/hangman")
+        #ปาร์คเห็นว่าใน url มีคำว่า hangman
+      
+        self.assertIn("/hangman", self.driver.current_url) 
         # ปาร์คเห็นข้อความ "Welcome to Hangman" บนหน้าเว็บ 
-       self.assertIn("Welcome to Hangman", self.driver.page_source)
+        self.assertIn("Welcome to Hangman", self.driver.page_source)
