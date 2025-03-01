@@ -1,5 +1,7 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
+from django.test import TestCase
+from django.urls import reverse
 
 class HangmanGameTest(StaticLiveServerTestCase):
    def setUp(self):
@@ -19,3 +21,8 @@ class HangmanGameTest(StaticLiveServerTestCase):
         self.assertIn("/hangman", self.driver.current_url) 
         # ปาร์คเห็นข้อความ "Welcome to Hangman" บนหน้าเว็บ 
         self.assertIn("Welcome to Hangman", self.driver.page_source)
+
+   def test_hangman_game_uses_correct_template(self):
+        response = self.client.get(reverse("hangman:index"))  
+        self.assertEqual(response.status_code, 200)  
+        self.assertTemplateUsed(response, "game.html")  
