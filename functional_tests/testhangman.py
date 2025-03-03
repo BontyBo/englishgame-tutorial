@@ -25,4 +25,4 @@ class HangmanGameTest(StaticLiveServerTestCase):
    def test_hangman_game_uses_correct_template(self):
         response = self.client.get(reverse("hangman:index"))  
         self.assertEqual(response.status_code, 200)  
-        self.assertTemplateUsed(response, "game.html")  
+        self.assertTemplateUsed(response, "hangman/game.html")  
