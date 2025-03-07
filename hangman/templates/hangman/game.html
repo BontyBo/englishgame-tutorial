@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman</title>
+    <script>
+        console.log("{{Guessed}}")
+    </script>
 </head>
 <body>
     <header>Welcome to Hangman</header>
+    <!-- <p id = {{ word }}>{{ word }}</p> -->
+    <form action="{% url 'hangman:index' %}" method="POST"> 
+        {% csrf_token %}
+        <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+        <input type = "hidden" name = "word" id = "word" value="{{word}}">
+        <input type = "hidden" name = "Guessed" value={{Guessed}}>
+        <input type = "hidden" name = "attemp" id = "attemp" value="{{ attemp }}">
+        <input type = "hidden" name = "message" value="{{ message }}">
+
+        <p id = "word-display" value ={{wordDisplay}}>{{ wordDisplay }}</p>
+        <input name="guess" id="guess-input" maxlength="1" required>
+        <button type="submit" id ="submit-guess">Submit</button>
+        <div>
+            Guessed: <span id="guessed-letters">{{ Guessed|join:" " }}</span>
+        </div>        
+        <div type = "text" >
+            attemp left : <span id = "attempts-left">{{ attemp }}</span>
+        </div>
+        <p id = "message">{{ message }}</p>
+        
+    </form>
 </body>
 </html>
